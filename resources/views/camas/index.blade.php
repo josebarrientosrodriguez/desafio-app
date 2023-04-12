@@ -1,5 +1,5 @@
 @extends('layouts/template')
-@section('title','Pacientes')
+@section('title','Camas')
 @section('contenido')
     <main>
         <div class="justify-content-center container-sm py-4 w-50">
@@ -11,8 +11,8 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <div class="float-start">Listado de Pacientes</div>
-                    <div class="float-end"><a href="{{url('pacientes/create')}}" class="btn btn-primary">Crear paciente</a> </div>
+                    <div class="float-start">Listado de Camas</div>
+                    <div class="float-end"><a href="{{url('cama/create')}}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear Cama</a> </div>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -25,13 +25,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($datosPacientes as $datos)
-                        <tr>
-                            <td>{{$datos->id}}</td>
-                            <td>{{$datos->nombre}}</td>
-                            <td>{{$datos->usuarioCrea->email}}</td>
-                            <td>aca ira un boton</td>
-                        </tr>
+                        @foreach($datosCamas as $datos)
+                            <tr>
+                                <td>{{$datos->id}}</td>
+                                <td>{{$datos->nombre}}</td>
+                                <td>{{$datos->usuarioCrea->email}}</td>
+                                <td>aca ira un boton</td>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>

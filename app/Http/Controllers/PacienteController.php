@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PacienteController extends Controller
 {
@@ -12,8 +13,9 @@ class PacienteController extends Controller
      */
     public function index()
     {
+        $datosPacientes = Pacientes::all();
         //Carga vista principal
-        return view('pacientes.index');
+        return view('pacientes.index',['datosPacientes'=>$datosPacientes]);
     }
 
     /**
@@ -30,7 +32,18 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id_usuario = Auth::id();
+        $request->validate([
+            'txt_nombre' => 'required|max:20'
+        ]);
+        $paciente = new Pacientes();
+        $paciente->nombre = $request->input('txt_nombre');
+        $paciente->usuario_crea = $id_usuario;
+        $paciente->usuario_mod = $id_usuario;
+        $paciente->activo = 'S';
+        $paciente->save();
+        $datosPacientes = Pacientes::all();
+        return view('pacientes.index',['mensaje'=>'Registro guardado','datosPacientes'=>$datosPacientes]);
     }
 
     /**
